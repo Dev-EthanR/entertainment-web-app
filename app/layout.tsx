@@ -1,9 +1,7 @@
-import type { Metadata } from "next";
-import { Outfit, Geist } from "next/font/google";
-import "./globals.css";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
+import "./globals.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -21,8 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full", "antialiased", outfit.variable, "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="en"
+      className={cn("h-full", "antialiased", outfit.variable, "font-outfit")}
+    >
+      <body className="min-h-screen flex flex-col bg-primary-950">
+        <main className="flex flex-1 flex-col justify-center items-center ">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }

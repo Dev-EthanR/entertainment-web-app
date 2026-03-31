@@ -9,7 +9,7 @@
   --color-primary-950: #10141e;
   --color-primary-900: #1d1d2f;
   --color-primary-500: #5a698f;
-  --color-error: #fc4747;
+  --color-accent-500: #fc4747;
   --radius-primary: 8px;
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
@@ -131,5 +131,11 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .input {
+    @apply caret-accent-500 text-white border-b border-b-primary-500 pb-4 px-4 border-x-0 border-t-0 rounded-none outline-none focus-visible:ring-0;
   }
 }
