@@ -11,7 +11,7 @@ const AuthContainer = ({ title, children }: Props) => {
   return (
     <div className="flex flex-col items-center">
       <Image
-        src="../../icon.svg"
+        src="/icon-logo.svg"
         alt="logo"
         width={30}
         height={30}
