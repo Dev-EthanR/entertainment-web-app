@@ -6,6 +6,7 @@ import { useState } from "react";
 import AuthContainer from "./AuthContainer";
 import { Fields } from "@/utils/types/AuthField";
 import { DescriptionContent } from "@/utils/types/AuthDescription";
+import { register } from "@/lib/actions/register";
 
 interface Props {
   fields: Fields<SignUpUserType>[];
@@ -15,13 +16,16 @@ interface Props {
 const SignUpForm = ({ fields, description }: Props) => {
   const [serverError, setServerError] = useState("");
 
-  async function onSubmit(formData: SignUpUserType) {
-    // const result = await register(formData);
-    // if (result?.error) return setServerError(result.error);
+  async function onSubmit(data: SignUpUserType) {
+      const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    const result = await register(formData);
+    if (result?.error) return setServerError(result.error);
   }
 
   return (
-    <AuthContainer title="Login">
+    <AuthContainer title="Sign Up">
       <Form
         onSubmit={onSubmit}
         schema={signUpSchema}
