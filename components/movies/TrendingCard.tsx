@@ -9,7 +9,6 @@ interface Props {
 }
 
 const TrendingCard = ({ title, image, date, type, language }: Props) => {
-  console.log(image);
   return (
     <div
       className="relative w-60 lg:w-117.5 h-35 lg:h-50 rounded-lg overflow-hidden shrink-0"
@@ -20,7 +19,7 @@ const TrendingCard = ({ title, image, date, type, language }: Props) => {
       }}
     >
       <div className="absolute bottom-4 left-4 text-white rounded">
-        <div className="flex gap-3 text-[15px] font-light mb-0.5">
+        <div className="flex gap-3 text-xs md:text-[15px] font-light mb-0.5">
           <p>{date.split("-")[0]}</p>
           <p className="flex items-center gap-1">
             <Image
@@ -37,7 +36,7 @@ const TrendingCard = ({ title, image, date, type, language }: Props) => {
           </p>
           <p>{language.toUpperCase()}</p>
         </div>
-        <h3 className="text-2xl font-medium">{title}</h3>
+        <h3 className="text-[15px] md:text-2xl font-medium">{title}</h3>
       </div>
     </div>
   );
