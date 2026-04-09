@@ -139,3 +139,24 @@
     @apply caret-accent-500 text-white border-b border-b-primary-500 pb-4 px-4 border-x-0 border-t-0 rounded-none outline-none focus-visible:ring-0;
   }
 }
+
+.scrollbar-theme::-webkit-scrollbar {
+  height: 8px;
+}
+.scrollbar-theme::-webkit-scrollbar-track {
+  background: #1d1d2f;
+  border-radius: 4px;
+}
+.scrollbar-theme::-webkit-scrollbar-thumb {
+  background-color: #5a698f;
+  border-radius: 4px;
+  border: 2px solid #10141e;
+}
+.scrollbar-theme::-webkit-scrollbar-thumb:hover {
+  background-color: #1d1d2f;
+}
+
+.scrollbar-theme {
+  scrollbar-width: thin;
+  scrollbar-color: #5a698f #1d1d2f;
+}
