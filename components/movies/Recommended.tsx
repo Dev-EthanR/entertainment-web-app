@@ -2,12 +2,21 @@
 import { useRecommendation } from "@/hooks/useRecommendation";
 import { getRelease } from "@/utils/getRelease";
 import { getTitle } from "@/utils/getTitle";
+import InfiniteScrollContainer from "../InfiniteScrollContainer";
+import { Spinner } from "../ui/spinner";
 import Card from "./Card";
-import LoadTrending from "./LoadTrending";
+import LoadingCard from "./LoadingCard";
 
 const Recommended = () => {
-  const { data, status } = useRecommendation();
-
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useRecommendation();
+  const recommendations = data?.pages.flatMap((page) => page.results);
   if (status === "error") return <p>Error fetching data</p>;
 
   return (
@@ -16,17 +25,20 @@ const Recommended = () => {
         Recommended for you
       </h2>
       {status === "pending" && (
-        <div className="flex gap-4 p-4 max-w-full overflow-hidden lg:ml-2.5">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <LoadTrending key={index} />
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 lg:ml-6 ">
+          {Array.from({ length: 20 }).map((_, index) => (
+            <LoadingCard key={index} />
           ))}
         </div>
       )}
       {status === "success" && (
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 lg:ml-6 ">
-          {data?.map((item) => (
+        <InfiniteScrollContainer
+          onBottomReach={() => hasNextPage && !isFetching && fetchNextPage()}
+          style="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 lg:ml-6 "
+        >
+          {recommendations?.map((item) => (
             <Card
-              key={item.id}
+              key={`${item.id}-${item.type}`}
               title={getTitle(item)}
               image={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
               date={getRelease(item)}
@@ -34,8 +46,9 @@ const Recommended = () => {
               language={item.original_language}
             />
           ))}
-        </div>
+        </InfiniteScrollContainer>
       )}
+      {isFetching && <Spinner className="mx-auto size-6" />}
     </>
   );
 };

@@ -13,7 +13,7 @@ const Card = ({ title, image, date, type, language }: Props) => {
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
       <Image
-        src={image}
+        src={image || "/fallback.png"}
         alt={title}
         width={280}
         height={180}
