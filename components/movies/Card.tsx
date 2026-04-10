@@ -1,5 +1,6 @@
 import Image from "next/image";
 import DotSpacer from "../DotSpacer";
+import { useState } from "react";
 
 interface Props {
   title: string;
@@ -10,14 +11,16 @@ interface Props {
 }
 
 const Card = ({ title, image, date, type, language }: Props) => {
+  const [thumbnail, setThumbnail] = useState(image);
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
       <Image
-        src={image || "/fallback.png"}
+        src={thumbnail}
         alt={title}
         width={280}
         height={180}
         className="object-cover w-full h-45"
+        onError={() => setThumbnail("/fallback.png")}
       />
       <div className="text-white pt-1.5">
         <div className="flex gap-1.5 text-xs md:text-[13px] font-light mb-0.5 text-white/70">
