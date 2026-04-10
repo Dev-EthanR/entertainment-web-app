@@ -22,7 +22,7 @@ const Movies = () => {
     ).values(),
   );
 
-  if (status === "error") return <p>Error fetching data</p>;
+  if (status === "error") return alert("Error fetching data");
   return (
     <>
       <h2 className="text-white  lg:ml-6 text-[20px] md:text-[32px] font-light mb-4">
