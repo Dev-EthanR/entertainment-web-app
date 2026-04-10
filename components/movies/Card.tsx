@@ -14,7 +14,7 @@ const Card = ({ title, image, date, type, language }: Props) => {
     <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
       <Image
         src={image}
-        alt={type}
+        alt={title}
         width={280}
         height={180}
         className="object-cover w-full h-45"

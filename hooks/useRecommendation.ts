@@ -2,6 +2,7 @@ import { Movie } from "@/utils/types/Movie";
 import { Series } from "@/utils/types/Series";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import _ from "lodash";
 
 export type Data = Movie | Series;
 
@@ -25,5 +26,6 @@ export function useRecommendation() {
       return [...normalizedMovies, ...normalizedTv];
     },
     staleTime: 1000 * 60 * 5,
+    select: (data) => _.shuffle(data),
   });
 }

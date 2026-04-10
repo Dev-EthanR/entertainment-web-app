@@ -2,7 +2,7 @@ import { Movie } from "@/utils/types/Movie";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-export function useTrending() {
+export function useMovies() {
   return useQuery({
     queryKey: ["discover", "movie"],
     queryFn: async (): Promise<Movie[]> => {
