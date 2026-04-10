@@ -23,7 +23,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-primary-900 text-white w-full md:w-[calc(100vw-36px)] lg:w-25 lg:h-[calc(100vh-64px)] fixed md:mx-4 md:my-4 lg:mx-8 lg:my-8 md:rounded-lg lg:rounded-3xl p-4 md:px-6 lg:py-12 flex lg:flex-col justify-between lg:items-center">
+    <div className="bg-primary-900 text-white w-full md:w-[calc(100vw-36px)] lg:w-25 lg:h-[calc(100vh-64px)] fixed md:mx-4 md:my-4 lg:mx-8 lg:my-8 md:rounded-lg lg:rounded-3xl p-4 md:px-6 lg:py-12 flex lg:flex-col justify-between lg:items-center z-30">
       <div className="lg:space-y-20 flex justify-between w-full lg:flex-col lg:items-center">
         <Image
           src="/icon-logo.svg"

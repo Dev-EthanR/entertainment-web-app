@@ -23,7 +23,7 @@ const Recommended = () => {
         .map((item) => [item.id, item]),
     ).values(),
   );
-  if (status === "error") return alert("Error fetching data");
+  if (status === "error") return <p>Error fetching data</p>;
 
   return (
     <>
