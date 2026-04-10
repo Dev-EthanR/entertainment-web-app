@@ -4,12 +4,12 @@ import { Skeleton } from "../ui/skeleton";
 
 const LoadingCard = () => {
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
-      <Skeleton className="w-screen h-45 bg-primary-900" />
-      <div className="text-white pt-1.5">
+    <Card className="relative w-full h-full rounded-lg overflow-hidden shrink-0 bg-transparent">
+      <Skeleton className="w-screen h-40 bg-primary-900" />
+      <CardContent className="text-white p-0">
         <Skeleton className="h-8 w-full bg-primary-900" />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

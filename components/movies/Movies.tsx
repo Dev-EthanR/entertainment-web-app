@@ -14,7 +14,13 @@ const Movies = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useMovies();
-  const movies = data?.pages.flatMap((page) => page.results);
+  const movies = Array.from(
+    new Map(
+      data?.pages
+        .flatMap((page) => page.results)
+        .map((item) => [item.id, item]),
+    ).values(),
+  );
 
   if (status === "error") return <p>Error fetching data</p>;
   return (
@@ -48,7 +54,7 @@ const Movies = () => {
             ))}
         </InfiniteScrollContainer>
       )}
-      {isFetching && <Spinner className="mx-auto size-6" />}
+      {isFetchingNextPage && <Spinner className="mx-auto size-6" />}
     </>
   );
 };

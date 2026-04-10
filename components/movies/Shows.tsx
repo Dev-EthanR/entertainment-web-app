@@ -14,8 +14,13 @@ const Shows = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useShows();
-  const shows = data?.pages.flatMap((page) => page.results);
-
+  const shows = Array.from(
+    new Map(
+      data?.pages
+        .flatMap((page) => page.results)
+        .map((item) => [item.id, item]),
+    ).values(),
+  );
   if (status === "error") return <p>Error fetching data</p>;
   return (
     <>
@@ -48,7 +53,7 @@ const Shows = () => {
             ))}
         </InfiniteScrollContainer>
       )}
-      {isFetchingNextPage && <Spinner />}
+      {isFetchingNextPage && <Spinner className="mx-auto size-6" />}
     </>
   );
 };

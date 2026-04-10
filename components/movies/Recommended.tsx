@@ -16,7 +16,13 @@ const Recommended = () => {
     isFetchingNextPage,
     status,
   } = useRecommendation();
-  const recommendations = data?.pages.flatMap((page) => page.results);
+  const recommendations = Array.from(
+    new Map(
+      data?.pages
+        .flatMap((page) => page.results)
+        .map((item) => [item.id, item]),
+    ).values(),
+  );
   if (status === "error") return <p>Error fetching data</p>;
 
   return (
@@ -48,7 +54,7 @@ const Recommended = () => {
           ))}
         </InfiniteScrollContainer>
       )}
-      {isFetching && <Spinner className="mx-auto size-6" />}
+      {isFetchingNextPage && <Spinner className="mx-auto size-6" />}
     </>
   );
 };
