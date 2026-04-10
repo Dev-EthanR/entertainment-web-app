@@ -1,14 +1,12 @@
 "use client";
+import { useTrending } from "@/hooks/useTrending";
+import { getTitle } from "@/utils/getTitle";
 import LoadTrending from "./LoadTrending";
 import TrendingCard from "./TrendingCard";
-import { Data, useTrending } from "@/hooks/useTrending";
+import { getRelease } from "@/utils/getRelease";
 
-const Display = () => {
+const Trending = () => {
   const { data, status } = useTrending();
-
-  const getTitle = (item: Data) => ("title" in item ? item.title : item.name);
-  const getRelease = (item: Data) =>
-    "release_date" in item ? item.release_date : item.first_air_date;
 
   if (status === "error") return <p>Error fetching data</p>;
 
@@ -42,4 +40,4 @@ const Display = () => {
   );
 };
 
-export default Display;
+export default Trending;

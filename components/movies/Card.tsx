@@ -5,22 +5,22 @@ interface Props {
   title: string;
   image: string;
   date: string;
-  type: "movie" | "tv";
+  type: string;
   language: string;
 }
 
-const TrendingCard = ({ title, image, date, type, language }: Props) => {
+const Card = ({ title, image, date, type, language }: Props) => {
   return (
-    <div
-      className="relative w-60 lg:w-117.5 h-35 lg:h-50 rounded-lg overflow-hidden shrink-0"
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="absolute bottom-0 left-0 pl-4 pb-4 h-full w-full flex flex-col justify-end text-white rounded bg-linear-to-b from-transparent to-black/30 ">
-        <div className="flex gap-1.5 text-xs md:text-[15px] font-light mb-0.5">
+    <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
+      <Image
+        src={image}
+        alt={type}
+        width={280}
+        height={180}
+        className="object-cover w-full h-45"
+      />
+      <div className="text-white pt-1.5">
+        <div className="flex gap-1.5 text-xs md:text-[13px] font-light mb-0.5 text-white/70">
           <span className="flex items-center gap-1.5">
             <p>{date.split("-")[0]}</p>
             <DotSpacer color="bg-white/70" />
@@ -43,10 +43,10 @@ const TrendingCard = ({ title, image, date, type, language }: Props) => {
           </span>
           <p>{language.toUpperCase()}</p>
         </div>
-        <h3 className="text-[15px] md:text-2xl font-medium">{title}</h3>
+        <h3 className="text-[15px] md:text-lg font-medium">{title}</h3>
       </div>
     </div>
   );
 };
 
-export default TrendingCard;
+export default Card;

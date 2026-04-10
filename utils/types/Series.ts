@@ -6,9 +6,10 @@ export interface Series {
   original_name: string;
   overview: string;
   poster_path: string;
-  media_type: string;
+  media_type?: string;
   original_language: string;
   genre_ids: number[];
+  type?: string;
   popularity: number;
   first_air_date: string;
   vote_average: number;
