@@ -1,7 +1,11 @@
-import React from "react";
+import BookmarkItems from "@/components/movies/BookmarkItems";
 
 const BookmarksPage = () => {
-  return <div>BookmarksPage</div>;
+  return (
+    <div className="items-start lg:ml-30 mt-18 lg:mt-10 max-w-full lg:max-w-[calc(100vw-160px)] mb-6 mx-4">
+      <BookmarkItems />
+    </div>
+  );
 };
 
 export default BookmarksPage;

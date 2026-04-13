@@ -42,14 +42,7 @@ const Shows = () => {
           {shows &&
             shows.length > 0 &&
             shows?.map((item) => (
-              <Card
-                key={item.id}
-                title={item.name}
-                image={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
-                date={item.first_air_date}
-                type={"tv"}
-                language={item.original_language}
-              />
+              <Card key={item.id} type={"tv"} details={item} />
             ))}
         </InfiniteScrollContainer>
       )}

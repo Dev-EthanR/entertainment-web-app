@@ -1,31 +1,44 @@
+"use client";
 import Image from "next/image";
 import DotSpacer from "../DotSpacer";
 import { useState } from "react";
+import Bookmark from "../Bookmark";
+import { Movie } from "@/utils/types/Movie";
+import { Series } from "@/utils/types/Series";
+import { getTitle } from "@/utils/getTitle";
+import { getRelease } from "@/utils/getRelease";
 
 interface Props {
-  title: string;
-  image: string;
-  date: string;
   type: string;
-  language: string;
+  details: Movie | Series;
+  bookmarked?: boolean;
+  bookmarkId?: string;
 }
 
-const Card = ({ title, image, date, type, language }: Props) => {
-  const [thumbnail, setThumbnail] = useState(image);
+const Card = ({ type, details: item, bookmarked, bookmarkId }: Props) => {
+  const [thumbnail, setThumbnail] = useState(
+    `https://image.tmdb.org/t/p/w500${item.backdrop_path}`,
+  );
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden shrink-0">
       <Image
         src={thumbnail}
-        alt={title}
+        alt={getTitle(item)}
         width={280}
         height={180}
         className="object-cover w-full h-45"
         onError={() => setThumbnail("/fallback.png")}
       />
+      <Bookmark
+        classname="absolute top-0 right-0 m-2"
+        object={item}
+        bookmarkState={bookmarked}
+        bookmarkId={bookmarkId}
+      />
       <div className="text-white pt-1.5">
         <div className="flex gap-1.5 text-xs md:text-[13px] font-light mb-0.5 text-white/70">
           <span className="flex items-center gap-1.5">
-            <p>{date.split("-")[0]}</p>
+            <p>{getRelease(item).split("-")[0]}</p>
             <DotSpacer color="bg-white/70" />
           </span>
           <span className="flex items-center gap-1.5">
@@ -44,9 +57,9 @@ const Card = ({ title, image, date, type, language }: Props) => {
             </p>
             <DotSpacer color="bg-white/70" />
           </span>
-          <p>{language.toUpperCase()}</p>
+          <p>{item.original_language.toUpperCase()}</p>
         </div>
-        <h3 className="text-[15px] md:text-lg font-medium">{title}</h3>
+        <h3 className="text-[15px] md:text-lg font-medium">{getTitle(item)}</h3>
       </div>
     </div>
   );

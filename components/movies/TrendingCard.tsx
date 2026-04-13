@@ -1,20 +1,21 @@
 import Image from "next/image";
 import DotSpacer from "../DotSpacer";
+import { Movie } from "@/utils/types/Movie";
+import { Series } from "@/utils/types/Series";
+import { getRelease } from "@/utils/getRelease";
+import { getTitle } from "@/utils/getTitle";
 
 interface Props {
-  title: string;
-  image: string;
-  date: string;
   type: "movie" | "tv";
-  language: string;
+  details: Movie | Series;
 }
 
-const TrendingCard = ({ title, image, date, type, language }: Props) => {
+const TrendingCard = ({ details: item, type }: Props) => {
   return (
     <div
       className="relative w-60 lg:w-117.5 h-35 lg:h-50 rounded-lg overflow-hidden shrink-0"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(https://image.tmdb.org/t/p/w500${item.backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -22,7 +23,7 @@ const TrendingCard = ({ title, image, date, type, language }: Props) => {
       <div className="absolute bottom-0 left-0 pl-4 pb-4 h-full w-full flex flex-col justify-end text-white rounded bg-linear-to-b from-transparent to-black/30 ">
         <div className="flex gap-1.5 text-xs md:text-[15px] font-light mb-0.5">
           <span className="flex items-center gap-1.5">
-            <p>{date.split("-")[0]}</p>
+            <p>{getRelease(item).split("-")[0]}</p>
             <DotSpacer color="bg-white/70" />
           </span>
           <span className="flex items-center gap-1.5">
@@ -41,9 +42,11 @@ const TrendingCard = ({ title, image, date, type, language }: Props) => {
             </p>
             <DotSpacer color="bg-white/70" />
           </span>
-          <p>{language.toUpperCase()}</p>
+          <p>{item.original_language.toUpperCase()}</p>
         </div>
-        <h3 className="text-[15px] md:text-2xl font-medium">{title}</h3>
+        <h3 className="text-[15px] md:text-2xl font-medium">
+          {getTitle(item)}
+        </h3>
       </div>
     </div>
   );

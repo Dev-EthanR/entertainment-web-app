@@ -1,7 +1,5 @@
 "use client";
 import { useRecommendation } from "@/hooks/useRecommendation";
-import { getRelease } from "@/utils/getRelease";
-import { getTitle } from "@/utils/getTitle";
 import InfiniteScrollContainer from "../InfiniteScrollContainer";
 import { Spinner } from "../ui/spinner";
 import Card from "./Card";
@@ -45,11 +43,8 @@ const Recommended = () => {
           {recommendations?.map((item) => (
             <Card
               key={`${item.id}-${item.type}`}
-              title={getTitle(item)}
-              image={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
-              date={getRelease(item)}
               type={item.type!}
-              language={item.original_language}
+              details={item}
             />
           ))}
         </InfiniteScrollContainer>

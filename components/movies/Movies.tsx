@@ -43,14 +43,7 @@ const Movies = () => {
           {movies &&
             movies.length > 0 &&
             movies?.map((item) => (
-              <Card
-                key={item.id}
-                title={item.title}
-                image={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
-                date={item.release_date}
-                type={"movie"}
-                language={item.original_language}
-              />
+              <Card key={item.id} details={item} type={"movie"} />
             ))}
         </InfiniteScrollContainer>
       )}

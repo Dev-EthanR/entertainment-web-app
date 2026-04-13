@@ -1,9 +1,7 @@
 "use client";
 import { useTrending } from "@/hooks/useTrending";
-import { getTitle } from "@/utils/getTitle";
 import LoadTrending from "./LoadTrending";
 import TrendingCard from "./TrendingCard";
-import { getRelease } from "@/utils/getRelease";
 
 const Trending = () => {
   const { data, status } = useTrending();
@@ -27,11 +25,8 @@ const Trending = () => {
           {data?.map((movie) => (
             <TrendingCard
               key={movie.id}
-              title={getTitle(movie)}
-              image={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-              date={getRelease(movie)}
               type={"title" in movie ? "movie" : "tv"}
-              language={movie.original_language}
+              details={movie}
             />
           ))}
         </div>
