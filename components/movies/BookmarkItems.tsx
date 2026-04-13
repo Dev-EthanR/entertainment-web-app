@@ -11,7 +11,6 @@ const BookmarkItems = () => {
     return <p className="text-white text-5xl">No bookmarks</p>;
   const movies = data?.filter((item) => item.mediaType === "movie");
   const shows = data?.filter((item) => item.mediaType === "tv");
-
   if (status === "pending") {
     return (
       <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 lg:ml-6 ">

@@ -4,13 +4,21 @@ import { Movie } from "@/utils/types/Movie";
 import { Series } from "@/utils/types/Series";
 import { getRelease } from "@/utils/getRelease";
 import { getTitle } from "@/utils/getTitle";
+import Bookmark from "../Bookmark";
 
 interface Props {
   type: "movie" | "tv";
   details: Movie | Series;
+  bookmarked?: boolean;
+  bookmarkId?: string;
 }
 
-const TrendingCard = ({ details: item, type }: Props) => {
+const TrendingCard = ({
+  details: item,
+  type,
+  bookmarkId,
+  bookmarked,
+}: Props) => {
   return (
     <div
       className="relative w-60 lg:w-117.5 h-35 lg:h-50 rounded-lg overflow-hidden shrink-0"
@@ -20,6 +28,13 @@ const TrendingCard = ({ details: item, type }: Props) => {
         backgroundPosition: "center",
       }}
     >
+      <Bookmark
+        classname="absolute top-0 right-0 m-2 z-10"
+        object={item}
+        bookmarkState={bookmarked}
+        bookmarkId={bookmarkId}
+        type={type}
+      />
       <div className="absolute bottom-0 left-0 pl-4 pb-4 h-full w-full flex flex-col justify-end text-white rounded bg-linear-to-b from-transparent to-black/30 ">
         <div className="flex gap-1.5 text-xs md:text-[15px] font-light mb-0.5">
           <span className="flex items-center gap-1.5">

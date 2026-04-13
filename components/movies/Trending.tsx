@@ -2,11 +2,15 @@
 import { useTrending } from "@/hooks/useTrending";
 import LoadTrending from "./LoadTrending";
 import TrendingCard from "./TrendingCard";
+import { useBookmark } from "@/hooks/useBookmark";
+import { checkBookmark } from "@/utils/checkBookmarks";
 
 const Trending = () => {
   const { data, status } = useTrending();
-
+  const { data: bookmarks } = useBookmark();
   if (status === "error") return <p>Error fetching data</p>;
+
+  const newData = checkBookmark(data ?? [], bookmarks ?? []);
 
   return (
     <>
@@ -22,11 +26,13 @@ const Trending = () => {
       )}
       {status === "success" && (
         <div className="flex gap-4 p-4 max-w-full overflow-x-auto scrollbar-theme lg:ml-2.5">
-          {data?.map((movie) => (
+          {newData?.map((item) => (
             <TrendingCard
-              key={movie.id}
-              type={"title" in movie ? "movie" : "tv"}
-              details={movie}
+              key={item.id}
+              type={"title" in item ? "movie" : "tv"}
+              details={item}
+              bookmarked={item.isBookmarked}
+              bookmarkId={item.bookmarkId || ""}
             />
           ))}
         </div>

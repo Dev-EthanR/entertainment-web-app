@@ -13,6 +13,7 @@ interface Props {
   object: Movie | Series;
   bookmarkState?: boolean;
   bookmarkId?: string;
+  type?: string;
 }
 
 const Bookmark = ({
@@ -20,6 +21,7 @@ const Bookmark = ({
   object,
   bookmarkState = false,
   bookmarkId,
+  type,
 }: Props) => {
   const [isBookmarked, setIsBookmarked] = useState(bookmarkState);
   const image = isBookmarked
@@ -30,7 +32,7 @@ const Bookmark = ({
       if (nextState === false && bookmarkId) {
         return axios.delete(`/api/bookmark/${bookmarkId}`);
       }
-      return axios.post("/api/bookmark", object);
+      return axios.post("/api/bookmark", { ...object, type });
     },
     onError: () => {
       setIsBookmarked((prev) => !prev);

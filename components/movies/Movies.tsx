@@ -4,6 +4,8 @@ import Card from "./Card";
 import LoadingCard from "./LoadingCard";
 import InfiniteScrollContainer from "../InfiniteScrollContainer";
 import { Spinner } from "../ui/spinner";
+import { useBookmark } from "@/hooks/useBookmark";
+import { checkBookmark } from "@/utils/checkBookmarks";
 
 const Movies = () => {
   const {
@@ -14,6 +16,9 @@ const Movies = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useMovies();
+  const { data: bookmarks } = useBookmark();
+  if (status === "error") return <p>Error fetching data</p>;
+
   const movies = Array.from(
     new Map(
       data?.pages
@@ -22,7 +27,7 @@ const Movies = () => {
     ).values(),
   );
 
-  if (status === "error") return <p>Error fetching data</p>;
+  const moviesData = checkBookmark(movies, bookmarks ?? []);
   return (
     <>
       <h2 className="text-white  lg:ml-6 text-[20px] md:text-[32px] font-light mb-4">
@@ -40,10 +45,16 @@ const Movies = () => {
           onBottomReach={() => hasNextPage && !isFetching && fetchNextPage()}
           style="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 lg:ml-6 "
         >
-          {movies &&
-            movies.length > 0 &&
-            movies?.map((item) => (
-              <Card key={item.id} details={item} type={"movie"} />
+          {moviesData &&
+            moviesData.length > 0 &&
+            moviesData?.map((item) => (
+              <Card
+                key={item.id}
+                details={item}
+                type={"movie"}
+                bookmarked={item.isBookmarked}
+                bookmarkId={item.bookmarkId || ""}
+              />
             ))}
         </InfiniteScrollContainer>
       )}

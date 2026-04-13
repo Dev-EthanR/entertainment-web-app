@@ -34,6 +34,7 @@ const Card = ({ type, details: item, bookmarked, bookmarkId }: Props) => {
         object={item}
         bookmarkState={bookmarked}
         bookmarkId={bookmarkId}
+        type={type}
       />
       <div className="text-white pt-1.5">
         <div className="flex gap-1.5 text-xs md:text-[13px] font-light mb-0.5 text-white/70">
