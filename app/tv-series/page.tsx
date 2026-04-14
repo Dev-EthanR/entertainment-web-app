@@ -1,9 +1,20 @@
+import SearchResults from "@/components/movies/SearchResults";
 import Shows from "@/components/movies/Shows";
+import Search from "@/components/Search";
+interface Props {
+  searchParams: Promise<{ search?: string }>;
+}
+const TvSeriesPage = async ({ searchParams }: Props) => {
+  const query = (await searchParams).search;
 
-const TvSeriesPage = () => {
   return (
     <div className="items-start lg:ml-30 mt-18 lg:mt-10 max-w-full lg:max-w-[calc(100vw-160px)] mb-6 mx-4">
-      <Shows />
+      <Search
+        style="ml-3 mb-4"
+        placeholder="Search for TV Series"
+        searchParams={query || ""}
+      />
+      {query ? <SearchResults searchParams={query} type="series" /> : <Shows />}
     </div>
   );
 };

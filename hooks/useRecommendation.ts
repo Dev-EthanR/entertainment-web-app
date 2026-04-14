@@ -1,8 +1,7 @@
 import { Movie } from "@/utils/types/Movie";
 import { Series } from "@/utils/types/Series";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import _ from "lodash";
 
 export type Data = Movie | Series;
 
