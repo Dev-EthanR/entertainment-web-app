@@ -12,14 +12,10 @@ const MoviesPage = async ({ searchParams }: Props) => {
     <div className="items-start lg:ml-30 mt-18 lg:mt-10 max-w-full lg:max-w-[calc(100vw-160px)] mb-6 mx-4">
       <Search
         style="ml-3 mb-4"
-        placeholder="Search for TV Series"
+        placeholder="Search for Movies"
         searchParams={query || ""}
       />
-      {query ? (
-        <SearchResults searchParams={query} type="series" />
-      ) : (
-        <Movies />
-      )}
+      {query ? <SearchResults searchParams={query} type="movie" /> : <Movies />}
     </div>
   );
 };
