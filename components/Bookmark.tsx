@@ -61,7 +61,7 @@ const Bookmark = ({
         }
       });
 
-      return { previous }; // returned as context
+      return { previous };
     },
     onError: (_err, _nextState, context) => {
       if (context?.previous) {
@@ -75,6 +75,9 @@ const Bookmark = ({
           old.map((b) => (b.id === "temp" ? data : b)),
         );
       }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
     },
   });
   const queryClient = useQueryClient();
